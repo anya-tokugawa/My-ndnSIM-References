@@ -1,2 +1,2 @@
-# ndnSIM-snippets-note
+# My ndnSIM References.
 ndnSIMのスニペット
