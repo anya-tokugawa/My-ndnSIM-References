@@ -6,6 +6,17 @@ pick times
 double nowTime = Simulator::Now().ToDouble(Time::S);
 ```
 
+pick node
+
+
+```cxx
+#include <ns3/node-list.h>
+#include <ns3/node.h>
+ns3::Node node = ns3::NodeList::GetNode(ns3::Simulator::GetContext());
+```
+
+
+
 pick faces from node.
 
 ```cxx
