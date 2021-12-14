@@ -44,8 +44,8 @@ node->GetObject<ndn::L3Protocol>()->getForwarder()->
 set at consumer
 
 ```cxx
-shared_ptr<Name> name = make_shared<Name>(m_interestName);
-nameWithSequence->appendSequenceNumber(seq);
+shared_ptr<Name> nameObj = make_shared<Name>(m_interestName);
+nameObj->appendSequenceNumber(seq);
 ```
 
 pick
