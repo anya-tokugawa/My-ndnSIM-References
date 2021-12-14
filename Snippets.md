@@ -1,5 +1,13 @@
 # Snippets Memo
 
+get times
+
+```cxx
+double nowTime = Simulator::Now().ToDouble(Time::S);
+```
+
+
+
 pick faces from node.
 
 ```cxx
