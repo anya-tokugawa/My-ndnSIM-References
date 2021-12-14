@@ -1,12 +1,10 @@
 # Snippets Memo
 
-get times
+pick times
 
 ```cxx
 double nowTime = Simulator::Now().ToDouble(Time::S);
 ```
-
-
 
 pick faces from node.
 
@@ -23,4 +21,19 @@ pick forwarder obj. from node.
 
 ```cxx
 node->GetObject<ndn::L3Protocol>()->getForwarder()->
+```
+
+##  SequenceNumber
+
+set at consumer
+
+```cxx
+shared_ptr<Name> name = make_shared<Name>(m_interestName);
+nameWithSequence->appendSequenceNumber(seq);
+```
+
+pick
+
+```cxx
+uint32_t seq = interest->getName().at(-1).toSequenceNumber();
 ```
