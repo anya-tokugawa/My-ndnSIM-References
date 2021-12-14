@@ -13,7 +13,11 @@ pick node
 #include <ns3/node-list.h>
 #include <ns3/node.h>
 // rerturn ptr.
-Ptr<ns3::Node> node = ns3::NodeList::GetNode(ns3::Simulator::GetContext());
+uint32_t context = ns3::Simulator::GetContext();
+if(context != std::numeric_limits<uint32_t>::max())
+{
+    Ptr<ns3::Node> node = ns3::NodeList::GetNode(context);
+}
 ```
 
 
