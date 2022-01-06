@@ -48,8 +48,19 @@ shared_ptr<Name> nameObj = make_shared<Name>(m_interestName);
 nameObj->appendSequenceNumber(seq);
 ```
 
-pick
+get seq
 
 ```cxx
 uint32_t seq = interest->getName().at(-1).toSequenceNumber();
+```
+
+## NodeContainer
+
+
+```cxx
+NodeContainer c;
+c.Add(NodeObj);
+for (NodeContainer::Iterator i = c.Begin(); i != c.End(); ++i) {
+    (*i)->GetId();
+}
 ```
