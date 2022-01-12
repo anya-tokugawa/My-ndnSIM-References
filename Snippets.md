@@ -64,3 +64,22 @@ for (NodeContainer::Iterator i = c.Begin(); i != c.End(); ++i) {
     (*i)->GetId();
 }
 ```
+
+## Schedule
+
+hpp
+
+```cxx
+public:
+    void foobarLogging(Ptr<YansWifiPhy> sender> const;
+```
+
+呼び出す関数は `const` で定義。
+
+```cxx
+void foobarLogging() const {
+   // processing...
+   Simulator::Schedule(Seconds(INTERVAL),&YourClassName::foobarLogging,this); 
+}
+```
+
