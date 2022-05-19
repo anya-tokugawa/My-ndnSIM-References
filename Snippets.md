@@ -1,31 +1,34 @@
-# Snippets Memo
+# 書き方
 
-pick times
+現在時刻を取得
 
 ```cxx
-double nowTime = Simulator::Now().ToDouble(Time::S);
+ns3::Time nowTime = Simulator::Now();
+double nowTimeSecond1 = nowTime.ToDouble(Time::S);
+double nowTimeSecond2 = nowTime.GetDouble();
 ```
 
-pick node
-
+ノードを取得
 
 ```cxx
+// 以下をincludeする必要あり．
 #include <ns3/node-list.h>
 #include <ns3/node.h>
-// rerturn ptr.
+
 uint32_t context = ns3::Simulator::GetContext();
+// コンテキストがuint32_tの最大値4294967295(=2^32 -1)の場合は未定義扱い．
 if(context != std::numeric_limits<uint32_t>::max())
 {
-    Ptr<ns3::Node> node = ns3::NodeList::GetNode(context);
+    // ポインタとしてノードを取得できる．
+    ns3::Ptr<ns3::Node> node = ns3::NodeList::GetNode(context);
+    // Idをとる．
+    uint32_t nodeId = node->GetId();
 }
 ```
 
-
-
-pick faces from node.
+ノードからNetDeviceFaceを取得する方法．
 
 ```cxx
-  ns3::Ptr<ns3::Node> node = ns3::NodeList::GetNode(ns3::Simulator::GetContext());
   ns3::Ptr<ns3::ndn::L3Protocol> ndn = node->GetObject<ns3::ndn::L3Protocol>();
   for (uint32_t i = 0; i < node->GetNDevices(); i++)
   {
@@ -39,22 +42,23 @@ pick forwarder obj. from node.
 node->GetObject<ndn::L3Protocol>()->getForwarder()->
 ```
 
-##  SequenceNumber
+##  シーケンス番号（チャンク番号）について
 
-set at consumer
+Nameに挿入する
 
 ```cxx
-shared_ptr<Name> nameObj = make_shared<Name>(m_interestName);
+shared_ptr<Name> name = make_shared<Name>("/path/to/content/name");
 nameObj->appendSequenceNumber(seq);
 ```
 
-get seq
+Nameから取得する
 
 ```cxx
-uint32_t seq = interest->getName().at(-1).toSequenceNumber();
+Name& name = interest->getName();
+uint32_t seq = name.at(-1).toSequenceNumber();
 ```
 
-## NodeContainer
+## ノードコンテナを用いて，ノードの集合を作る．
 
 
 ```cxx
@@ -65,21 +69,21 @@ for (NodeContainer::Iterator i = c.Begin(); i != c.End(); ++i) {
 }
 ```
 
-## Schedule
+## 自分自身に対し定期的に呼び出し直す．
 
-hpp
+classname.hpp
 
 ```cxx
 public:
-    void foobarLogging(Ptr<YansWifiPhy> sender> const;
+    void processing(Ptr<YansWifiPhy> sender> const;
 ```
 
-呼び出す関数は `const` で定義。
+classname.cpp
 
 ```cxx
-void foobarLogging() const {
+void processing() const {
    // processing...
-   Simulator::Schedule(Seconds(INTERVAL),&YourClassName::foobarLogging,this); 
+   Simulator::Schedule(Seconds(INTERVAL),&ClassName::processing,this); 
 }
 ```
 
