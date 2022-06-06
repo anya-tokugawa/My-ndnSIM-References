@@ -5,6 +5,10 @@ ndnSIMのスニペット
 
 - [ndnSIM 2.1のインストール](Install/ndnSIM21.md)
 
+## ログだし用テストコード
+
+- [Nameの抜き出しなど](test-codes/checkNameMethod.cpp)
+
 ## 参考サイト：
 
 - [ndnSIM.netでdoxygen](https://ndnsim.net)
