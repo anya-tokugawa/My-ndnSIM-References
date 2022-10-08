@@ -1,0 +1,2 @@
+- `backup.sh`: backup ns3 dir to backup dir.
+- `check-nslog-script-gen.sh`: check `NFD_LOG`
